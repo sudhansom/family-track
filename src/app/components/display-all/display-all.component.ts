@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -7,10 +7,13 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   styleUrls: ['./display-all.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DisplayAllComponent implements OnInit {
-  @Input()name = 'dddd';
+export class DisplayAllComponent {
+  @Input()name = '';
+  @Input()id = '';
 
-  ngOnInit(): void {
-    console.log('jflkdsjfls', name);
+  @Output()onEdit = new EventEmitter<string>();
+
+  editPerson(id: string){
+    this.onEdit.emit(id);
   }
 }

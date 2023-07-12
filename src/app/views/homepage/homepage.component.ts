@@ -37,5 +37,9 @@ export class HomepageComponent implements OnInit {
       this.allPersons$.next(data);
     });
   }
+
+  editPerson(id: string){
+    console.log('do you want to edit person ', id);
+  }
 }
 

@@ -1,2 +1,2 @@
 <app-person (onSave)="savePerson($event)"></app-person>
-<app-display-all *ngFor="let person of allPersons$ | async" [name]="person.name"></app-display-all>
+<app-display-all (onEdit)="editPerson($event)" *ngFor="let person of allPersons$ | async" [name]="person.name" [id]="person.id"></app-display-all>
