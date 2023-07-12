@@ -11,7 +11,7 @@ import { BehaviorSubject, map } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomepageComponent implements OnInit {
-  allPersons$ = new BehaviorSubject<any>([]);
+  allPersons$ = new BehaviorSubject<IPerson[]>([]);
 
   constructor(private dataService: DataService){}
 

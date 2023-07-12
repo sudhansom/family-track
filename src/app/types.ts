@@ -1,4 +1,5 @@
 export interface IPerson {
+  id:string,
   children: string[] | [],
   description: string,
   dob: Date,
