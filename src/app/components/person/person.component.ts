@@ -6,6 +6,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styleUrls: ['./person.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppointmentComponent {
+export class PersonComponent {
 
 }
