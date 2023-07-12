@@ -1,37 +1,37 @@
 <div class="wrapper">
-  <form class="wrapper__form">
+  <form class="wrapper__form" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
     <h2>Person Information:</h2>
     <label class="wrapper__form__type-1">Name:
-      <input type="text" name="name">
+      <input type="text" formControlName="name">
     </label>
     <label class="wrapper__form__gender">Gender:
       <label>
-        <input type="radio" value="male" name="gender">Male
+        <input type="radio" value="male" formControlName="gender">Male
       </label>
       <label>
-        <input type="radio" value="female" name="gender">Female
+        <input type="radio" value="female" formControlName="gender">Female
       </label>
       <label>
-        <input type="radio" value="other" name="gender">Other
+        <input type="radio" value="other" formControlName="gender">Other
       </label>
     </label>
     <label class="wrapper__form__type-1">Current location:
-      <input type="text" name="location">
+      <input type="text" formControlName="location">
     </label>
     <label class="wrapper__form__type-1">Description:
-      <textarea type="text" name="description"></textarea>
+      <textarea type="text" formControlName="description"></textarea>
     </label>
     <label class="wrapper__form__type-1">Date of Birth:
-      <input type="date" name="dob">
+      <input type="date" formControlName="dob">
     </label>
     <label class="wrapper__form__type-1">Phone:
-      <input type="text" name="phone">
+      <input type="text" formControlName="phone">
     </label>
     <label class="wrapper__form__type-1">Email:
-      <input type="email" name="email">
+      <input type="email" formControlName="email">
     </label>
     <label class="wrapper__form__type-1">Social media link:
-      <input type="text" name="link">
+      <input type="text" formControlName="link">
     </label>
     <button type="submit">Submit</button>
   </form>

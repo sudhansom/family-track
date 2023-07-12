@@ -9,6 +9,7 @@
       background-color: rgb(238, 234, 234);
       border-radius: 7px;
       padding: 12px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
       h2 {
         margin: 5px auto;
@@ -36,7 +37,7 @@
         transition: all .4s ease-in-out;
         cursor: pointer;
         &:hover {
-          filter: brightness(.8);
+          filter: brightness(.9);
         }
       }
     }

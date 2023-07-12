@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+import { IPerson } from 'src/app/types';
 
 @Component({
   selector: 'app-homepage',
@@ -9,4 +10,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class HomepageComponent {
 
+  savePerson(person: IPerson ){
+    console.log(person)
+  }
 }

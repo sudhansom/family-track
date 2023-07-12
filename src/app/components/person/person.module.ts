@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { PersonComponent } from "./person.component";
 
@@ -9,6 +10,7 @@ import { PersonComponent } from "./person.component";
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
   ],
   exports:[PersonComponent],
   providers: [],
