@@ -12,4 +12,7 @@ export class DataService {
   savePerson(person: IPerson){
     this._http.post<IPerson>(this.firebaseApi, person).subscribe(data => console.log(data, 'added...'))
   }
+  getAllPersons(){
+    return this._http.get<any>(this.firebaseApi);
+  }
 }
