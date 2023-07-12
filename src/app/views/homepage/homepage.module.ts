@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { HomepageComponent } from "./homepage.component";
 import { PersonModule } from "src/app/components/person/person.module";
+import { DisplayAllModule } from "src/app/components/display-all/display-all.module";
 
 const appRoutes: Routes = [
   {
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
     CommonModule,
     RouterModule.forChild(appRoutes),
     PersonModule,
+    DisplayAllModule,
   ],
   exports:[],
   providers: [],

@@ -1,1 +1,2 @@
 <app-person (onSave)="savePerson($event)"></app-person>
+<app-display-all *ngFor="let person of allPersons$ | async" [name]="person.name"></app-display-all>

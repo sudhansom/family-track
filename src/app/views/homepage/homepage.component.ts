@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { IPerson } from 'src/app/types';
 import { DataService } from 'src/app/services/data.service';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Component({
   selector: 'app-homepage',
@@ -11,7 +11,7 @@ import { map } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomepageComponent implements OnInit {
-  allPersons: any ;
+  allPersons$ = new BehaviorSubject<any>([]);
 
   constructor(private dataService: DataService){}
 
@@ -31,10 +31,11 @@ export class HomepageComponent implements OnInit {
           newArray.push({...allData[key], id: key});
         }
       }
-      this.allPersons = [...newArray];
       return newArray
 
-    })).subscribe(data => console.log(data));
+    })).subscribe(data => {
+      this.allPersons$.next(data);
+    });
   }
 }
 
