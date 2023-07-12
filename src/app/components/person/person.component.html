@@ -1,9 +1,10 @@
 <div class="wrapper">
-  <form>
-    <label>Name:
+  <form class="wrapper__form">
+    <h2>Person Information:</h2>
+    <label class="wrapper__form__type-1">Name:
       <input type="text" name="name">
     </label>
-    <label>Gender:
+    <label class="wrapper__form__gender">Gender:
       <label>
         <input type="radio" value="male" name="gender">Male
       </label>
@@ -14,17 +15,24 @@
         <input type="radio" value="other" name="gender">Other
       </label>
     </label>
-    <label>Current location:
+    <label class="wrapper__form__type-1">Current location:
       <input type="text" name="location">
     </label>
-    <label>Description:
+    <label class="wrapper__form__type-1">Description:
       <textarea type="text" name="description"></textarea>
     </label>
-    <label>Date of Birth:
+    <label class="wrapper__form__type-1">Date of Birth:
       <input type="date" name="dob">
     </label>
-    <label>Social media link:
+    <label class="wrapper__form__type-1">Phone:
+      <input type="text" name="phone">
+    </label>
+    <label class="wrapper__form__type-1">Email:
+      <input type="email" name="email">
+    </label>
+    <label class="wrapper__form__type-1">Social media link:
       <input type="text" name="link">
     </label>
+    <button type="submit">Submit</button>
   </form>
 </div>
