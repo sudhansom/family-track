@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { IPerson } from 'src/app/types';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-homepage',
@@ -10,7 +11,9 @@ import { IPerson } from 'src/app/types';
 })
 export class HomepageComponent {
 
+  constructor(private dataService: DataService){}
+
   savePerson(person: IPerson ){
-    console.log(person)
+    this.dataService.savePerson(person);
   }
 }

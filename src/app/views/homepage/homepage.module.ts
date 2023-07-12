@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-
 import { HomepageComponent } from "./homepage.component";
 import { PersonModule } from "src/app/components/person/person.module";
 
@@ -15,7 +14,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    HomepageComponent
+    HomepageComponent,
+
   ],
   imports: [
     CommonModule,

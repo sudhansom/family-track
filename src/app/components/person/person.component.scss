@@ -39,6 +39,10 @@
         &:hover {
           filter: brightness(.9);
         }
+        &.invalid {
+          background-color: rgb(163, 145, 145);
+          cursor: not-allowed;
+        }
       }
     }
   }
