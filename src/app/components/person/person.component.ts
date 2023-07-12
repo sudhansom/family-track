@@ -28,6 +28,7 @@ export class PersonComponent implements OnInit {
   onSubmit(){
     const newPerson: IPerson = {...this.reactiveForm.value, children: [], root: false}
     this.onSave.emit(newPerson);
+    this.reactiveForm.reset();
   }
 
 }

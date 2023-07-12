@@ -2,7 +2,7 @@
   <form class="wrapper__form" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
     <h2>Person Information:</h2>
     <label class="wrapper__form__type-1">Name:
-      <input type="text" formControlName="name">
+      <input type="text" placeholder="full name" formControlName="name">
     </label>
     <label class="wrapper__form__gender">Gender:
       <label>
@@ -16,22 +16,22 @@
       </label>
     </label>
     <label class="wrapper__form__type-1">Current location:
-      <input type="text" formControlName="location">
+      <input type="text" placeholder="location" formControlName="location">
     </label>
     <label class="wrapper__form__type-1">Description:
-      <textarea type="text" formControlName="description"></textarea>
+      <textarea type="text" placeholder="description" formControlName="description"></textarea>
     </label>
     <label class="wrapper__form__type-1">Date of Birth:
-      <input type="date" formControlName="dob">
+      <input type="date" placeholder="" formControlName="dob">
     </label>
     <label class="wrapper__form__type-1">Phone:
-      <input type="text" formControlName="phone">
+      <input type="text" placeholder="phone" formControlName="phone">
     </label>
     <label class="wrapper__form__type-1">Email:
-      <input type="email" formControlName="email">
+      <input type="email" placeholder="email" formControlName="email">
     </label>
     <label class="wrapper__form__type-1">Social media link:
-      <input type="text" formControlName="link">
+      <input type="text" placeholder="social media link" formControlName="link">
     </label>
     <button type="submit">Submit</button>
   </form>
