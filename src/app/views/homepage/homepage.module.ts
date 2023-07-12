@@ -2,6 +2,14 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { HomepageComponent } from "./homepage.component";
+import { RouterModule, Routes } from "@angular/router";
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: HomepageComponent
+  }
+]
 
 @NgModule({
   declarations: [
@@ -9,6 +17,7 @@ import { HomepageComponent } from "./homepage.component";
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild(appRoutes),
   ],
   exports:[],
   providers: [],
