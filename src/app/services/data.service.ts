@@ -13,6 +13,6 @@ export class DataService {
     return this._http.post<IPerson>(this.firebaseApi, person);
   }
   getAllPersons(){
-    return this._http.get<any>(this.firebaseApi);
+    return this._http.get<{[key:string]: IPerson}>(this.firebaseApi);
   }
 }
