@@ -1,0 +1,148 @@
+
+:host {
+  position: relative;
+  z-index: 11;
+  background-color: red;
+
+  form {
+    padding: 0px;
+    max-width: 620px;
+
+    .header {
+      color: var(--text-color);
+      .name-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .name {
+          font-size: 30px;
+          line-height: 32px;
+          margin: 0 0 10px;
+        }
+        span {
+          padding: 6px 12px;
+          background-color: green;
+          color: #fff;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+      }
+      .description {
+        font-size: 22px;
+        line-height: 24px;
+        margin: 0 0 40px;
+
+        a {
+          color: var(--a-tag-color);
+        }
+      }
+    }
+    .input-field {
+      label {
+        font-size: 14px;
+        width: 100%;
+      }
+
+      input {
+        background-color: #FFFFFF;
+        border: 1px solid rgba(37, 18, 45, 0.13);
+        border-radius: 9px;
+        box-shadow: 0 1px 8px 0 rgba(37, 18, 45, 0.05);
+        margin: 3px 0 30px;
+        padding: 15px;
+        width: 100%;
+      }
+
+    }
+    .form-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      label {
+        .gender {
+          margin-left: 12px;
+          padding: 6px;
+          border-radius: 3px;
+          box-shadow: 0 1px 8px 0 rgba(37, 18, 45, 0.05);
+          border: none;
+        }
+        input {
+          background-color: #FFFFFF;
+          border: 1px solid rgba(37, 18, 45, 0.13);
+          border-radius: 9px;
+          box-shadow: 0 1px 8px 0 rgba(37, 18, 45, 0.05);
+          margin: 3px 0 30px;
+          padding: 15px;
+          width: 100%;
+        }
+      }
+    }
+    .children {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      p {
+        margin: 0;
+      }
+
+      h5 {
+        font-size: 16px;
+        text-decoration: underline;
+      }
+
+      .sons {
+        display: flex;
+        flex-direction: column;
+        p:nth-child(n + 2) {
+          background-color: lightblue;
+        }
+      }
+      .daughters {
+        display: flex;
+        flex-direction: column;
+      }
+      p {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .delete {
+      cursor: pointer;
+      margin-left: 30px;
+      fill: red;
+      scale: .6;
+      &:hover {
+        filter: brightness(.8);
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 48px;
+
+      button {
+        padding: 6px 18px;
+        font-weight: bold;
+        font-size: 24px;
+        background-color: green;
+        color: #fff;
+        border-radius: 30px;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+      button:hover {
+        filter: brightness(.9);
+      }
+
+    }
+
+  }
+}
+
