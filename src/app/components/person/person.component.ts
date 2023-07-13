@@ -15,11 +15,11 @@ export class PersonComponent implements OnInit {
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
-      name: new FormControl(null, Validators.required),
+      name: new FormControl('null', Validators.required),
       gender: new FormControl('male'),
       location: new FormControl(null),
       description: new FormControl(null),
-      dob: new FormControl(new Date()),
+      dob: new FormControl(new Date().toLocaleDateString()),
       phone: new FormControl(null),
       email: new FormControl(null),
       link: new FormControl(null),
