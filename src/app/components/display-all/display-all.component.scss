@@ -1,3 +1,26 @@
 :host {
-
+  ul {
+    p {
+      display: flex;
+      align-items: center;
+    }
+    .icon {
+      display: inline-block;
+      scale: .7;
+      cursor: pointer;
+    }
+    span.index {
+      display: inline-block;
+      padding: 5px 0;
+      font-weight: bold;
+    }
+    span.name {
+      margin-inline: 6px;
+      cursor: pointer;
+    }
+    li {
+      list-style-type: none;
+      background-color: rgb(243, 239, 239);
+    }
+  }
 }

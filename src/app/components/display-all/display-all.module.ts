@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { DisplayAllComponent } from "./display-all.component";
+import { SvgIconModule } from "src/app/directives/svg-icon/svg-icon.module";
 
 @NgModule({
   declarations: [
@@ -9,6 +10,7 @@ import { DisplayAllComponent } from "./display-all.component";
   ],
   imports: [
     CommonModule,
+    SvgIconModule,
   ],
   exports:[DisplayAllComponent],
   providers: [],
