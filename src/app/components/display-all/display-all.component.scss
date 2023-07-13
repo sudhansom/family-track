@@ -1,4 +1,8 @@
 :host {
+  > ul {
+    padding: 0;
+  }
+
   ul {
     p {
       display: flex;
