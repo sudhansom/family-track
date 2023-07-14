@@ -64,7 +64,8 @@ export class ModalFormComponent {
 
   deleteItem(item: string){
     if (confirm('Are you sure you want to save this thing into the database?')) {
-      this.dataService.deleteMe(item, this.config.data.item.id).subscribe();
+      //this.dataService.deleteMe(item, this.config.data.item.id).subscribe();
+      console.log('deleted');
     }
   }
 
@@ -85,7 +86,7 @@ export class ModalFormComponent {
       children: [],
       parent: this.config.data.item.id,
     }
-    this.dataService.addOnePerson(newPerson).subscribe();
+    //this.dataService.addOnePerson(newPerson).subscribe();
     form.resetForm();
     this.confirmation$.next(false);
   }
@@ -103,7 +104,7 @@ export class ModalFormComponent {
       children: [],
       root: this.config.data.item?.root,
     }
-    this.dataService.editOnePerson(editedPerson).subscribe();
+    //this.dataService.editOnePerson(editedPerson).subscribe();
     this.editPerson$.next(!this.editPerson$.getValue());
     form.resetForm();
     alert(`data added to the database...`);

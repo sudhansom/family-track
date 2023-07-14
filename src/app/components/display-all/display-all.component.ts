@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
+import { PlatformLocation } from '@angular/common';
+import { ModalFormComponent } from '../modal-form/modal-form.component';
 
 interface IData {
     name: string,
@@ -17,7 +21,11 @@ interface IData {
   styleUrls: ['./display-all.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DisplayAllComponent {
+export class DisplayAllComponent implements OnDestroy {
+
+  private clearPopListener = this.platformLocation.onPopState(() => {
+    this.ref.close();
+  });
   @Input()name = '';
   @Input()id = '';
 
@@ -101,5 +109,36 @@ export class DisplayAllComponent {
       }
       return item;
     })
+  }
+
+  openModal(item: any){
+    this.ref = this.dialogService.open(ModalFormComponent, {
+      contentStyle: { overflow: 'auto', padding: '60px 60px 60px 30px', 'border-radius': '5px', 'background-color': 'lightgreen', 'box-shadow': 'rgba(0, 0, 0, 0.35) 0px 5px 15px'},
+      showHeader: false,
+      modal: true,
+      dismissableMask: true,
+      style: {
+        minWidth: '300px',
+      },
+      data: {
+        item: item,
+        allPersons: this.data,
+        description: `You can modify ${item?.name}'s details, add , update or delete children`,
+      }
+    });
+  }
+
+  constructor(
+    private dialogService: DialogService,
+    private platformLocation: PlatformLocation,
+    public ref: DynamicDialogRef,
+  ){
+
+    this.data.find(item => item.root);
+
+  }
+
+  ngOnDestroy(): void {
+    this.clearPopListener();
   }
 }
