@@ -91,24 +91,24 @@ export class ModalFormComponent {
     this.confirmation$.next(false);
   }
 
-  saveEditPerson(form: NgForm){
-    if(!form.value.name){
-      alert('please provide a name.');
-      return;
-    }
-    const { name, gender } = form.value;
-    const editedPerson = {
-      name,
-      gender: gender.toLowerCase(),
-      id: this.config.data.item.id,
-      children: [],
-      root: this.config.data.item?.root,
-    }
-    //this.dataService.editOnePerson(editedPerson).subscribe();
-    this.editPerson$.next(!this.editPerson$.getValue());
-    form.resetForm();
-    alert(`data added to the database...`);
-  }
+  // saveEditPerson(form: NgForm){
+  //   if(!form.value.name){
+  //     alert('please provide a name.');
+  //     return;
+  //   }
+  //   const { name, gender } = form.value;
+  //   const editedPerson = {
+  //     name,
+  //     gender: gender.toLowerCase(),
+  //     id: this.config.data.item.id,
+  //     children: [],
+  //     root: this.config.data.item?.root,
+  //   }
+  //   //this.dataService.editOnePerson(editedPerson).subscribe();
+  //   this.editPerson$.next(!this.editPerson$.getValue());
+  //   form.resetForm();
+  //   alert(`data added to the database...`);
+  // }
 
   getPerson(each: any){
    const person = this.allPersons.find((item: any) =>  item.id===each);

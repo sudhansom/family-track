@@ -1,8 +1,7 @@
-<form
+<div class="wrapper"
   *ngIf="!!!(confirmation$ | async)"
-  (ngSubmit)="saveEditPerson(form)" #form="ngForm"
 >
-  <div class="header">
+  <div class="header" *ngIf="!(editPerson$ | async)">
     <div class="name-section">
       <h3 class="name">{{config.data.item?.name}}</h3>
       <span (click)="editPerson$.next(!editPerson$.getValue())" title="Edit {{ config.data.item?.name }}">Edit</span>
@@ -36,52 +35,12 @@
     <button type="button" (click)="submit()">Add +</button>
   </div>
   <div class="form-inputs" *ngIf="editPerson$ | async">
-    <label>
-      Select the gender:
-      <select class="gender" ngModel name="gender">
-        <option *ngFor="let gen of ['Male', 'Female']">{{gen}}</option>
-      </select>
-    </label>
-
-    <!-- <label *ngIf="config.data.item.root" [ngStyle]="{margin:'20px 0'}">
-      <p-checkbox name="parent" ngModel></p-checkbox>
-      Do you want to add parent?
-    </label> -->
-
-    <label>
-      Name ( Save only one at a time )
-      <input name="name" type="text" [ngModel]="formValue?.value?.name">
-    </label>
-
-    <div class="buttons">
-      <button type="button" (click)="editPerson$.next(!editPerson$.getValue())">Cancel</button>
-      <button type="submit">Save</button>
-    </div>
+    <app-person></app-person>
+    <button type="button" (click)="close()">Cancel</button>
   </div>
-</form>
+</div>
 
-<form (ngSubmit)="saveData(form)" #form="ngForm" *ngIf="confirmation$ | async">
-  <div class="header">
-    <h3 class="company-name">You are about to update {{ config.data.item.name}}'s data.</h3>
-    <p class="description">Please select the gender and fill the input form.</p>
-  </div>
-
-  <div class="form-inputs">
-    <label>
-      Select the gender:
-      <select class="gender" ngModel name="gender">
-        <option *ngFor="let gen of ['Male', 'Female']">{{gen}}</option>
-      </select>
-    </label>
-
-    <label>
-      Name of a child ( Save only one child at a time )
-      <input name="name" type="text" [ngModel]="formValue?.value?.name">
-    </label>
-  </div>
-
-  <div class="buttons" style="margin-left:'auto'">
-    <button type="button" (click)="this.confirmation$.next(!this.confirmation$.getValue())">Cancel</button>
-    <button type="submit">Save</button>
-  </div>
-</form>
+<div *ngIf="confirmation$ | async">
+  <app-person></app-person>
+  <button type="button" (click)="close()">Cancel</button>
+</div>

@@ -5,10 +5,18 @@ import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { SvgIconModule } from 'src/app/directives/svg-icon/svg-icon.module';
 import {CheckboxModule} from 'primeng/checkbox';
+import { PersonModule } from '../person/person.module';
 
 @NgModule({
   declarations: [ModalFormComponent],
-  imports: [CommonModule, FormsModule, DropdownModule, SvgIconModule, CheckboxModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    DropdownModule,
+    SvgIconModule,
+    CheckboxModule,
+    PersonModule,
+  ],
   exports: [ModalFormComponent],
   providers: [],
 })

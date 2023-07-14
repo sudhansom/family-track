@@ -1,15 +1,15 @@
 :host {
   .wrapper {
-    max-width: 400px;
+    //max-width: 400px;
     margin: auto;
     &__form {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      background-color: rgb(238, 234, 234);
+      background-color: rgb(236, 233, 233);
       border-radius: 7px;
-      padding: 20px;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      //padding: 20px;
+      //box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
       h2 {
         margin: 5px auto;

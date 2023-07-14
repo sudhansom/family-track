@@ -113,7 +113,7 @@ export class DisplayAllComponent implements OnDestroy {
 
   openModal(item: any){
     this.ref = this.dialogService.open(ModalFormComponent, {
-      contentStyle: { overflow: 'auto', padding: '60px 60px 60px 30px', 'border-radius': '5px', 'background-color': 'lightgreen', 'box-shadow': 'rgba(0, 0, 0, 0.35) 0px 5px 15px'},
+      contentStyle: { overflow: 'auto', padding: '20px', 'border-radius': '5px', 'background-color': 'rgb(236, 233, 233)', 'box-shadow': 'rgba(0, 0, 0, 0.35) 0px 5px 15px'},
       showHeader: false,
       modal: true,
       dismissableMask: true,
