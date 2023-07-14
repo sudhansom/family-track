@@ -19,6 +19,7 @@ export class HomepageComponent implements OnInit {
     this.dataService.savePerson(person).subscribe(data => {
       this.fetchData();
     });
+    //this.dataService.editPerson('person');
   }
 
   ngOnInit(): void {
