@@ -7,7 +7,7 @@ interface IData {
     id: string,
     gender: string,
     description: string,
-    children: string[],
+    children?: string[],
     link: string,
     expand?: boolean,
 }
@@ -61,7 +61,6 @@ export class DisplayAllComponent {
       id: 'bbb',
       gender: 'male',
       description: 'dfklsdlf ljdfl sdl jflsd',
-      children: [],
       link: '',
     },
     {
@@ -89,7 +88,7 @@ export class DisplayAllComponent {
   expandOrClose(root: IData){
     this.data = this.data.map(item => {
       if(item.id === root.id){
-        if(item.children.length){
+        if(item?.children?.length){
           return {
             ...item,
             expand: !(item?.expand),
