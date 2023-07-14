@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DataService } from 'src/app/services/data.service';
 
 import { IPerson } from 'src/app/types';
 
@@ -15,7 +16,7 @@ export class PersonComponent implements OnInit {
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
-      name: new FormControl('null', Validators.required),
+      name: new FormControl(null, Validators.required),
       gender: new FormControl('male'),
       location: new FormControl(null),
       description: new FormControl(null),
@@ -27,8 +28,11 @@ export class PersonComponent implements OnInit {
   }
   onSubmit(){
     const newPerson: IPerson = {...this.reactiveForm.value, children: [], root: false, id:''}
-    this.onSave.emit(newPerson);
+    //this.dataService.editPerson('newPerson');
+    this.dataService.savePerson(newPerson).subscribe(d => console.log(d));
     this.reactiveForm.reset();
   }
+
+  constructor(private dataService: DataService){}
 
 }

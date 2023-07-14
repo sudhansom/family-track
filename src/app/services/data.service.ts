@@ -23,11 +23,11 @@ export class DataService {
         children = ['zzz'];
       }
       else{
-        children = [...children, 'kkk'];
+        children = ['-N_Jm5DC2mgzYEygo3Yi'];
       }
-      person = { ...data, children:children };
+      person = { ...data, children:children, root: true };
       console.log('person value: ...', person);
-      this._http.put<IPerson>('https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/-N_Fysl8WIkeXSeMSbKU.json', person)
+      this._http.put<IPerson>('https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/-N_FyGw7mGs2JMQmOrhK.json', person)
       .subscribe(d => console.log('edited...', d));
     })
 
@@ -37,6 +37,6 @@ export class DataService {
   }
 
   getOnePerson(id: string){
-    return this._http.get<IPerson>('https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/-N_Fysl8WIkeXSeMSbKU.json')
+    return this._http.get<IPerson>('https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/-N_FyGw7mGs2JMQmOrhK.json')
   }
 }

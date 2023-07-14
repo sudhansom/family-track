@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { BehaviorSubject, map } from 'rxjs';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PlatformLocation } from '@angular/common';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
+import { DataService } from 'src/app/services/data.service';
 
-interface IData {
+
+interface IPerson {
     name: string,
     dob: Date,
     root: boolean,
@@ -19,7 +22,7 @@ interface IData {
   selector: 'app-display-all',
   templateUrl: './display-all.component.html',
   styleUrls: ['./display-all.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisplayAllComponent implements OnDestroy {
 
@@ -31,7 +34,10 @@ export class DisplayAllComponent implements OnDestroy {
 
   expand = 'minus';
 
-  root: IData = {
+  //data$ = new BehaviorSubject<IPerson[]>([]);
+  data: IPerson[] = [];
+
+  root: IPerson = {
     name: 'main',
     dob: new Date(),
     root: true,
@@ -41,47 +47,47 @@ export class DisplayAllComponent implements OnDestroy {
     children: ['aaa','bbb'],
     link: '',
   }
-  data: IData[] = [
-    {
-      name: 'main',
-      dob: new Date(),
-      root: true,
-      id: '',
-      gender: 'male',
-      description: 'dfklsdlf ljdfl sdl jflsd',
-      children: ['aaa', 'bbb'],
-      link: '',
-    },
-    {
-      name: 'child1',
-      dob: new Date(),
-      root: false,
-      id: 'aaa',
-      gender: 'male',
-      description: 'dfklsdlf ljdfl sdl jflsd',
-      children: ['aaa1'],
-      link: '',
-    },
-    {
-      name: 'child2',
-      dob: new Date(),
-      root: false,
-      id: 'bbb',
-      gender: 'male',
-      description: 'dfklsdlf ljdfl sdl jflsd',
-      link: '',
-    },
-    {
-      name: 'child11',
-      dob: new Date(),
-      root: false,
-      id: 'aaa1',
-      gender: 'male',
-      description: 'dfklsdlf ljdfl sdl jflsd',
-      children: [],
-      link: '',
-    }
-  ]
+  // data: IData[] = [
+  //   {
+  //     name: 'main',
+  //     dob: new Date(),
+  //     root: true,
+  //     id: '',
+  //     gender: 'male',
+  //     description: 'dfklsdlf ljdfl sdl jflsd',
+  //     children: ['aaa', 'bbb'],
+  //     link: '',
+  //   },
+  //   {
+  //     name: 'child1',
+  //     dob: new Date(),
+  //     root: false,
+  //     id: 'aaa',
+  //     gender: 'male',
+  //     description: 'dfklsdlf ljdfl sdl jflsd',
+  //     children: ['aaa1'],
+  //     link: '',
+  //   },
+  //   {
+  //     name: 'child2',
+  //     dob: new Date(),
+  //     root: false,
+  //     id: 'bbb',
+  //     gender: 'male',
+  //     description: 'dfklsdlf ljdfl sdl jflsd',
+  //     link: '',
+  //   },
+  //   {
+  //     name: 'child11',
+  //     dob: new Date(),
+  //     root: false,
+  //     id: 'aaa1',
+  //     gender: 'male',
+  //     description: 'dfklsdlf ljdfl sdl jflsd',
+  //     children: [],
+  //     link: '',
+  //   }
+  // ]
 
   @Output()onEdit = new EventEmitter<string>();
 
@@ -93,7 +99,7 @@ export class DisplayAllComponent implements OnDestroy {
     return this.data.find(item => item.id === id);
   }
 
-  expandOrClose(root: IData){
+  expandOrClose(root: IPerson){
     this.data = this.data.map(item => {
       if(item.id === root.id){
         if(item?.children?.length){
@@ -132,10 +138,22 @@ export class DisplayAllComponent implements OnDestroy {
     private dialogService: DialogService,
     private platformLocation: PlatformLocation,
     public ref: DynamicDialogRef,
+    private dataService: DataService,
   ){
-
-    this.data.find(item => item.root);
-
+    this.dataService.getAllPersons()
+    .pipe(map(data => {
+      const tempData: IPerson[] = []
+      for(const key in data){
+       if(data[key]){
+         tempData.push({...data[key], id: key});
+      }
+       }
+       return tempData;
+    }))
+    .subscribe(data => {
+      this.data = data;
+       //data.find(item => item.root);
+    });
   }
 
   ngOnDestroy(): void {

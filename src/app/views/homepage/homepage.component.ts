@@ -16,10 +16,10 @@ export class HomepageComponent implements OnInit {
   constructor(private dataService: DataService){}
 
   savePerson(person: IPerson ){
-    this.dataService.savePerson(person).subscribe(data => {
-      this.fetchData();
-    });
-    //this.dataService.editPerson('person');
+    // this.dataService.savePerson(person).subscribe(data => {
+    //   this.fetchData();
+    // });
+    this.dataService.editPerson('person');
   }
 
   ngOnInit(): void {
@@ -39,10 +39,6 @@ export class HomepageComponent implements OnInit {
     })).subscribe(data => {
       this.allPersons$.next(data);
     });
-  }
-
-  editPerson(id: string){
-    console.log('do you want to edit person ', id);
   }
 }
 
