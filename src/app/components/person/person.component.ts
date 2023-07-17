@@ -14,25 +14,29 @@ export class PersonComponent implements OnInit {
   reactiveForm: FormGroup = new FormGroup<any>({});
   @Output()onSave = new EventEmitter<IPerson>()
   @Input() editMode = false;
-  @Input() currentPerson = '';
+  @Input() currentPerson?: IPerson;
 
   ngOnInit(): void {
-    this.dataService.getOnePerson(this.currentPerson).subscribe(person => console.log(person));
+    console.log(this.currentPerson);
     this.reactiveForm = new FormGroup({
-      name: new FormControl('null', Validators.required),
-      gender: new FormControl('male'),
-      location: new FormControl(null),
-      description: new FormControl(null),
-      dob: new FormControl(new Date().toLocaleDateString()),
-      phone: new FormControl(null),
-      email: new FormControl(null),
-      link: new FormControl(null),
+      name: new FormControl(this.editMode? this.currentPerson?.name:null, Validators.required),
+      gender: new FormControl(this.editMode? this.currentPerson?.gender:'male'),
+      location: new FormControl(this.editMode? this.currentPerson?.location:null),
+      description: new FormControl(this.editMode? this.currentPerson?.description:null),
+      dob: new FormControl(this.editMode? this.currentPerson?.dob:new Date().toLocaleDateString()),
+      phone: new FormControl(this.editMode? this.currentPerson?.phone:null),
+      email: new FormControl(this.editMode? this.currentPerson?.email:null),
+      link: new FormControl(this.editMode? this.currentPerson?.link:null),
     })
   }
   onSubmit(){
     const newPerson: IPerson = {...this.reactiveForm.value, children: [], root: false, id:''}
-    //this.dataService.editPerson('newPerson');
-    this.dataService.savePerson(newPerson).subscribe(d => console.log(d));
+    if(this.editMode){
+      console.log('in person edit mode...');
+      this.dataService.editPerson(newPerson);
+    }else{
+      this.dataService.savePerson(newPerson).subscribe(d => console.log(d));
+    }
     this.reactiveForm.reset();
   }
 

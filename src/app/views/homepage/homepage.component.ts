@@ -15,13 +15,6 @@ export class HomepageComponent implements OnInit {
 
   constructor(private dataService: DataService){}
 
-  savePerson(person: IPerson ){
-    // this.dataService.savePerson(person).subscribe(data => {
-    //   this.fetchData();
-    // });
-    this.dataService.editPerson('person');
-  }
-
   ngOnInit(): void {
     this.fetchData();
   }

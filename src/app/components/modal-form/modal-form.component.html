@@ -35,12 +35,12 @@
     <button type="button" (click)="showModal$.next(false)">Add +</button>
   </div>
   <div class="cancel"  *ngIf="editPerson$ | async">
-    <app-person [currentPerson]="config.data?.item?.id" [editMode]="true"></app-person>
+    <app-person [currentPerson]="config.data?.item" [editMode]="true"></app-person>
     <button type="button" (click)="close()">Cancel</button>
   </div>
 </div>
 
 <div class="cancel"  *ngIf="!!!(showModal$ | async)">
-  <app-person [currentPerson]="config.data?.item?.id"></app-person>
+  <app-person [currentPerson]="config.data?.item"></app-person>
   <button type="button" (click)="close()">Cancel</button>
 </div>

@@ -13,22 +13,12 @@ export class DataService {
     return this._http.post<IPerson>(this.firebaseApi, person);
   }
 
-  editPerson(id: string){
-    console.log('in service edit...');
-     let person: IPerson;
-
-     this.getOnePerson(id).subscribe(data => {
+  editPerson(person: IPerson){
+     this.getOnePerson(person.id).subscribe(data => {
       let children = data?.children;
-      if(!children){
-        children = ['zzz'];
-      }
-      else{
-        children = ['-N_Jm5DC2mgzYEygo3Yi'];
-      }
-      person = { ...data, children:children, root: true };
-      console.log('person value: ...', person);
+      person = { ...person, children:[...children] };
       this._http.put<IPerson>('https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/-N_FyGw7mGs2JMQmOrhK.json', person)
-      .subscribe(d => console.log('edited...', d));
+      .subscribe(d => console.log('edited person...', d));
     })
 
   }
