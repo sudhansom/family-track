@@ -9,7 +9,7 @@
     <p class="description">{{config.data.description}}</p>
   </div>
 
-  <ng-container *ngIf="config.data.item.children.length && !(editPerson$ | async)">
+  <ng-container *ngIf="config.data.item?.children?.length && !(editPerson$ | async)">
   <h4>Children:</h4>
   <div class="children">
     <div class="sons">
