@@ -78,6 +78,10 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
     }));
   }
 
+  errorMessage(){
+    alert('does not have any child');
+  }
+
   openModal(item: any){
     this.ref = this.dialogService.open(ModalFormComponent, {
       contentStyle: { overflow: 'auto', padding: '20px', 'border-radius': '5px', 'background-color': 'rgb(236, 233, 233)', 'box-shadow': 'rgba(0, 0, 0, 0.35) 0px 5px 15px'},
