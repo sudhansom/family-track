@@ -15,6 +15,7 @@ export class PersonComponent implements OnInit {
   @Output()onSave = new EventEmitter<IPerson>()
   @Input() editMode = false;
   @Input() currentPerson?: IPerson;
+  @Output() onHideForm = new EventEmitter();
 
   ngOnInit(): void {
     console.log(this.currentPerson);
@@ -41,6 +42,7 @@ export class PersonComponent implements OnInit {
       });
     }
     this.reactiveForm.reset();
+    this.onHideForm.emit();
   }
 
   constructor(private dataService: DataService){}

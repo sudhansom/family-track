@@ -79,4 +79,9 @@ export class ModalFormComponent {
     const gender = this.allPersons.find((item: any) => item?.id===each)?.gender;
     return gender;
   }
+
+  hideForm(){
+    this.showModal$.next(true);
+    this.editPerson$.next(false);
+  }
 }
