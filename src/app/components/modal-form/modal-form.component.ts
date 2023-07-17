@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter } from 
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BehaviorSubject } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
-import { NgForm } from '@angular/forms';
 
 
 interface IFormFieldValue {
