@@ -28,7 +28,7 @@ interface IData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalFormComponent {
-  confirmation$ = new BehaviorSubject(false);
+  showModal$ = new BehaviorSubject(true);
 
   loading$ = new BehaviorSubject(false);
 
@@ -58,10 +58,6 @@ export class ModalFormComponent {
     private dataService: DataService,
   ) {}
 
-  submit(){
-    this.confirmation$.next(true);
-  }
-
   deleteItem(item: string){
     if (confirm('Are you sure you want to save this thing into the database?')) {
       //this.dataService.deleteMe(item, this.config.data.item.id).subscribe();
@@ -88,7 +84,7 @@ export class ModalFormComponent {
     }
     //this.dataService.addOnePerson(newPerson).subscribe();
     form.resetForm();
-    this.confirmation$.next(false);
+    this.showModal$.next(false);
   }
 
   // saveEditPerson(form: NgForm){

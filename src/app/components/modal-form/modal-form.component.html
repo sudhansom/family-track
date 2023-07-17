@@ -1,5 +1,5 @@
 <div class="wrapper"
-  *ngIf="!!!(confirmation$ | async)"
+  *ngIf="showModal$ | async"
 >
   <div class="header" *ngIf="!(editPerson$ | async)">
     <div class="name-section">
@@ -32,7 +32,7 @@
 
   <div class="buttons" *ngIf="!(editPerson$ | async)" >
     <button type="button" (click)="close()">Cancel</button>
-    <button type="button" (click)="submit()">Add +</button>
+    <button type="button" (click)="showModal$.next(false)">Add +</button>
   </div>
   <div class="cancel"  *ngIf="editPerson$ | async">
     <app-person [editMode]="true"></app-person>
@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<div class="cancel"  *ngIf="confirmation$ | async">
+<div class="cancel"  *ngIf="!!!(showModal$ | async)">
   <app-person></app-person>
   <button type="button" (click)="close()">Cancel</button>
 </div>
