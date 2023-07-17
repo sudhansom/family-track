@@ -61,7 +61,9 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
   }
 
   expandOrClose(root: IPerson){
-    this.data$.subscribe(data => data.map(item => {
+    this.data$.subscribe(data => {
+      // let tempData =
+      data.map(item => {
       if(item.id === root.id){
         if(item?.children?.length){
           return {
@@ -75,7 +77,9 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
         }
       }
       return item;
-    }));
+    })
+    //this.data$.next(tempData);
+  });
   }
 
   errorMessage(){
