@@ -30,11 +30,16 @@ export class PersonComponent implements OnInit {
     })
   }
   onSubmit(){
-    const newPerson: IPerson = {...this.reactiveForm.value, children: [], root: false, id:''}
     if(this.editMode){
+      const newPerson: IPerson = {...this.reactiveForm.value, id:this.currentPerson?.id}
+      console.log('in person: ',newPerson)
       this.dataService.editPerson(newPerson);
+      this.editMode = false;
     }else{
-      this.dataService.savePerson(newPerson).subscribe(d => console.log(d));
+      const newPerson: IPerson = {...this.reactiveForm.value, children: [], root: false, id:this.currentPerson?.id}
+      this.dataService.savePerson(newPerson).subscribe(d => {
+        this.dataService.addChild(newPerson.id, d.name);
+      });
     }
     this.reactiveForm.reset();
   }

@@ -13,20 +13,40 @@ export class DataService {
     return this._http.post<IPerson>(this.firebaseApi, person);
   }
 
+  createANewDatabase(person: any){
+    return this._http.post<IPerson>(this.firebaseApi, person);
+  }
+
   editPerson(person: IPerson){
+    console.log('in data service.....',person);
      this.getOnePerson(person.id).subscribe(data => {
       let children = data?.children;
-      person = { ...person, children:[...children] };
-      this._http.put<IPerson>('https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/-N_FyGw7mGs2JMQmOrhK.json', person)
+      let root = data?.root;
+      let newPerson = { ...person, children:children, root: root, id:'' };
+      console.log('DS before editing: ',data);
+      this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${person.id}.json`, newPerson)
       .subscribe(d => console.log('edited person...', d));
     })
-
+  }
+  addChild(parentId: string, childId: string){
+    this.getOnePerson(parentId).subscribe(data => {
+      let children = data?.children;
+      if(!children){
+        children = [childId];
+      }
+      else {
+        children = [...children, childId ];
+      }
+      let person = { ...data, children:children };
+      this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${parentId}.json`, person)
+      .subscribe(d => console.log('child added to ...', person.name));
+    })
   }
   getAllPersons(){
     return this._http.get<{[key:string]: IPerson}>(this.firebaseApi);
   }
 
   getOnePerson(id: string){
-    return this._http.get<IPerson>('https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/-N_FyGw7mGs2JMQmOrhK.json')
+    return this._http.get<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${id}.json`);
   }
 }

@@ -119,8 +119,10 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
     }))
     .subscribe(data => {
       this.data$.next(data);
-       this.data$.subscribe(d => this.root$.next(d.find(item => item.root)));
+      console.log(data);
+      this.data$.subscribe(d => this.root$.next(d.find(item => item.root)));
     });
+    //this.dataService.createANewDatabase({name: 'Bhuwan',dob:new Date(), description: '', link:'', gender:'male',id:'', children:[], phone:'004581916893', email:'abc@email.com', root:true}).subscribe(d => console.log('added:', d));
   }
 
   ngOnDestroy(): void {
