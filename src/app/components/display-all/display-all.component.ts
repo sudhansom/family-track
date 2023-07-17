@@ -42,7 +42,7 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
       root: true,
       id: '',
       gender: 'male',
-      description: 'dfklsdlf ljdfl sdl jflsd',
+      description: '',
       children: ['aaa','bbb'],
       link: '',
     }
