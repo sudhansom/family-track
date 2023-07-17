@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 
@@ -13,6 +13,7 @@ import { IPerson } from 'src/app/types';
 export class PersonComponent implements OnInit {
   reactiveForm: FormGroup = new FormGroup<any>({});
   @Output()onSave = new EventEmitter<IPerson>()
+  @Input() editMode = false;
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({

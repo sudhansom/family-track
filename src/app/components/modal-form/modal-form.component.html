@@ -35,7 +35,7 @@
     <button type="button" (click)="submit()">Add +</button>
   </div>
   <div class="cancel"  *ngIf="editPerson$ | async">
-    <app-person></app-person>
+    <app-person [editMode]="true"></app-person>
     <button type="button" (click)="close()">Cancel</button>
   </div>
 </div>
