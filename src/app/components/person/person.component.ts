@@ -14,10 +14,12 @@ export class PersonComponent implements OnInit {
   reactiveForm: FormGroup = new FormGroup<any>({});
   @Output()onSave = new EventEmitter<IPerson>()
   @Input() editMode = false;
+  @Input() currentPerson = '';
 
   ngOnInit(): void {
+    this.dataService.getOnePerson(this.currentPerson).subscribe(person => console.log(person));
     this.reactiveForm = new FormGroup({
-      name: new FormControl(null, Validators.required),
+      name: new FormControl('null', Validators.required),
       gender: new FormControl('male'),
       location: new FormControl(null),
       description: new FormControl(null),

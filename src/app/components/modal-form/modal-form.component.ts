@@ -56,7 +56,9 @@ export class ModalFormComponent {
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private dataService: DataService,
-  ) {}
+  ) {
+
+  }
 
   deleteItem(item: string){
     if (confirm('Are you sure you want to save this thing into the database?')) {
@@ -68,43 +70,6 @@ export class ModalFormComponent {
   close(){
     this.ref.close();
   }
-
-  saveData(form: NgForm){
-    if(!form.value.name){
-      alert('please provide a name.');
-      return;
-    }
-    const { name, gender } = form.value;
-    const newPerson = {
-      name,
-      gender: gender.toLowerCase(),
-      id: '',
-      children: [],
-      parent: this.config.data.item.id,
-    }
-    //this.dataService.addOnePerson(newPerson).subscribe();
-    form.resetForm();
-    this.showModal$.next(false);
-  }
-
-  // saveEditPerson(form: NgForm){
-  //   if(!form.value.name){
-  //     alert('please provide a name.');
-  //     return;
-  //   }
-  //   const { name, gender } = form.value;
-  //   const editedPerson = {
-  //     name,
-  //     gender: gender.toLowerCase(),
-  //     id: this.config.data.item.id,
-  //     children: [],
-  //     root: this.config.data.item?.root,
-  //   }
-  //   //this.dataService.editOnePerson(editedPerson).subscribe();
-  //   this.editPerson$.next(!this.editPerson$.getValue());
-  //   form.resetForm();
-  //   alert(`data added to the database...`);
-  // }
 
   getPerson(each: any){
    const person = this.allPersons.find((item: any) =>  item.id===each);
