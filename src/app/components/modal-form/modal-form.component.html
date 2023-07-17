@@ -34,13 +34,13 @@
     <button type="button" (click)="close()">Cancel</button>
     <button type="button" (click)="submit()">Add +</button>
   </div>
-  <div class="form-inputs" *ngIf="editPerson$ | async">
+  <div class="cancel"  *ngIf="editPerson$ | async">
     <app-person></app-person>
     <button type="button" (click)="close()">Cancel</button>
   </div>
 </div>
 
-<div *ngIf="confirmation$ | async">
+<div class="cancel"  *ngIf="confirmation$ | async">
   <app-person></app-person>
   <button type="button" (click)="close()">Cancel</button>
 </div>

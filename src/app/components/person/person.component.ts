@@ -34,5 +34,4 @@ export class PersonComponent implements OnInit {
   }
 
   constructor(private dataService: DataService){}
-
 }

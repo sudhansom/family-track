@@ -3,3 +3,21 @@ body {
   margin: 0;
   padding: 0;
 }
+.cancel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  button {
+    background-color: rgb(220, 217, 217);
+    border: none;
+    border-radius: 7px;
+    padding: 10px;
+    cursor: pointer;
+
+    transition: all .4s ease-in-out;
+    &:hover {
+      background-color: rgb(217, 209, 209);
+    }
+  }
+}
