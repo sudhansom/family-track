@@ -18,12 +18,10 @@ export class DataService {
   }
 
   editPerson(person: IPerson){
-    console.log('in data service.....',person);
      this.getOnePerson(person.id).subscribe(data => {
       let children = data?.children;
       let root = data?.root;
       let newPerson = { ...person, children:children, root: root, id:'' };
-      console.log('DS before editing: ',data);
       this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${person.id}.json`, newPerson)
       .subscribe(d => console.log('edited person...', d));
     })

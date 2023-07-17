@@ -32,7 +32,6 @@ export class PersonComponent implements OnInit {
   onSubmit(){
     if(this.editMode){
       const newPerson: IPerson = {...this.reactiveForm.value, id:this.currentPerson?.id}
-      console.log('in person: ',newPerson)
       this.dataService.editPerson(newPerson);
       this.editMode = false;
     }else{
