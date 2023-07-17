@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -24,7 +24,7 @@ interface IPerson {
   styleUrls: ['./display-all.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DisplayAllComponent implements OnDestroy {
+export class DisplayAllComponent implements OnInit, OnDestroy {
 
   private clearPopListener = this.platformLocation.onPopState(() => {
     this.ref.close();
@@ -35,17 +35,18 @@ export class DisplayAllComponent implements OnDestroy {
   expand = 'minus';
 
   data$ = new BehaviorSubject<IPerson[]>([]);
-
-  root: any = {
-    name: 'main',
-    dob: new Date(),
-    root: true,
-    id: '',
-    gender: 'male',
-    description: 'dfklsdlf ljdfl sdl jflsd',
-    children: ['aaa','bbb'],
-    link: '',
-  }
+  root$ = new BehaviorSubject<any>(
+    {
+      name: 'main',
+      dob: new Date(),
+      root: true,
+      id: '',
+      gender: 'male',
+      description: 'dfklsdlf ljdfl sdl jflsd',
+      children: ['aaa','bbb'],
+      link: '',
+    }
+  )
 
   @Output()onEdit = new EventEmitter<string>();
 
@@ -99,7 +100,9 @@ export class DisplayAllComponent implements OnDestroy {
     private platformLocation: PlatformLocation,
     public ref: DynamicDialogRef,
     private dataService: DataService,
-  ){
+  ){}
+
+  ngOnInit(){
     this.dataService.getAllPersons()
     .pipe(map(data => {
       const tempData: IPerson[] = []
@@ -112,7 +115,7 @@ export class DisplayAllComponent implements OnDestroy {
     }))
     .subscribe(data => {
       this.data$.next(data);
-       this.data$.subscribe(d => this.root = d.find(item => item.root));
+       this.data$.subscribe(d => this.root$.next(d.find(item => item.root)));
     });
   }
 

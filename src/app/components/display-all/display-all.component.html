@@ -1,6 +1,6 @@
 
 <ng-container
-*ngTemplateOutlet="recursiveListTmpl; context:{ root: root }"
+*ngTemplateOutlet="recursiveListTmpl; context:{ root: root$ | async }"
 ></ng-container>
 
 <ng-template #recursiveListTmpl let-root="root">
