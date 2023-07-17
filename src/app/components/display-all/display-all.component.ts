@@ -22,7 +22,7 @@ interface IPerson {
   selector: 'app-display-all',
   templateUrl: './display-all.component.html',
   styleUrls: ['./display-all.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisplayAllComponent implements OnDestroy {
 
@@ -34,10 +34,9 @@ export class DisplayAllComponent implements OnDestroy {
 
   expand = 'minus';
 
-  //data$ = new BehaviorSubject<IPerson[]>([]);
-  data: IPerson[] = [];
+  data$ = new BehaviorSubject<IPerson[]>([]);
 
-  root: IPerson = {
+  root: any = {
     name: 'main',
     dob: new Date(),
     root: true,
@@ -47,47 +46,6 @@ export class DisplayAllComponent implements OnDestroy {
     children: ['aaa','bbb'],
     link: '',
   }
-  // data: IData[] = [
-  //   {
-  //     name: 'main',
-  //     dob: new Date(),
-  //     root: true,
-  //     id: '',
-  //     gender: 'male',
-  //     description: 'dfklsdlf ljdfl sdl jflsd',
-  //     children: ['aaa', 'bbb'],
-  //     link: '',
-  //   },
-  //   {
-  //     name: 'child1',
-  //     dob: new Date(),
-  //     root: false,
-  //     id: 'aaa',
-  //     gender: 'male',
-  //     description: 'dfklsdlf ljdfl sdl jflsd',
-  //     children: ['aaa1'],
-  //     link: '',
-  //   },
-  //   {
-  //     name: 'child2',
-  //     dob: new Date(),
-  //     root: false,
-  //     id: 'bbb',
-  //     gender: 'male',
-  //     description: 'dfklsdlf ljdfl sdl jflsd',
-  //     link: '',
-  //   },
-  //   {
-  //     name: 'child11',
-  //     dob: new Date(),
-  //     root: false,
-  //     id: 'aaa1',
-  //     gender: 'male',
-  //     description: 'dfklsdlf ljdfl sdl jflsd',
-  //     children: [],
-  //     link: '',
-  //   }
-  // ]
 
   @Output()onEdit = new EventEmitter<string>();
 
@@ -96,11 +54,13 @@ export class DisplayAllComponent implements OnDestroy {
   }
 
   getPerson(id: string){
-    return this.data.find(item => item.id === id);
+    let data:any;
+    this.data$.subscribe(d => {data = d.find(item => item.id === id)});
+    return data;
   }
 
   expandOrClose(root: IPerson){
-    this.data = this.data.map(item => {
+    this.data$.subscribe(data => data.map(item => {
       if(item.id === root.id){
         if(item?.children?.length){
           return {
@@ -114,7 +74,7 @@ export class DisplayAllComponent implements OnDestroy {
         }
       }
       return item;
-    })
+    }));
   }
 
   openModal(item: any){
@@ -128,7 +88,7 @@ export class DisplayAllComponent implements OnDestroy {
       },
       data: {
         item: item,
-        allPersons: this.data,
+        allPersons: this.data$.getValue(),
         description: `You can modify ${item?.name}'s details, add , update or delete children`,
       }
     });
@@ -151,8 +111,8 @@ export class DisplayAllComponent implements OnDestroy {
        return tempData;
     }))
     .subscribe(data => {
-      this.data = data;
-       //data.find(item => item.root);
+      this.data$.next(data);
+       this.data$.subscribe(d => this.root = d.find(item => item.root));
     });
   }
 
