@@ -15,13 +15,21 @@
     <div class="sons">
       <h5>Son</h5>
       <div *ngFor="let each of config.data.item?.children; let i = index" >
-        <p  *ngIf="getGender(each)==='male'"><strong>{{i + 1}}.&nbsp;&nbsp;&nbsp;<span>{{getPerson(each)}}</span></strong> <span (click)="deleteItem(each)" (click)="deleteItem(each)" [smSvgIcon]="'delete'" [title]="'delete'" class="delete"></span></p>
+        <p  *ngIf="getGender(each)==='male'">
+            <strong>{{i + 1}}.&nbsp;&nbsp;&nbsp;<span>{{getPerson(each)}}</span></strong>
+            <span  (click)="editItem(each)" [smSvgIcon]="'edit'" [title]="'edit'" class="edit"></span>
+            <span (click)="deleteItem(each)" [smSvgIcon]="'delete'" [title]="'delete'" class="delete"></span>
+          </p>
       </div>
     </div>
     <div class="daughters">
       <h5>Daughter</h5>
       <div *ngFor="let each of config.data.item?.children; let i = index" >
-        <p  *ngIf="getGender(each)==='female'"><strong>{{i + 1}}.&nbsp;&nbsp;&nbsp;<span>{{getPerson(each)}}</span></strong> <span (click)="deleteItem(each)" [smSvgIcon]="'delete'" [title]="'delete'" class="delete"></span></p>
+        <p  *ngIf="getGender(each)==='female'">
+          <strong>{{i + 1}}.&nbsp;&nbsp;&nbsp;<span>{{getPerson(each)}}</span></strong>
+          <span  (click)="editItem(each)" [smSvgIcon]="'edit'" [title]="'edit'" class="edit"></span>
+          <span (click)="deleteItem(each)" [smSvgIcon]="'delete'" [title]="'delete'" class="delete"></span>
+        </p>
       </div>
     </div>
   </div>
@@ -35,12 +43,12 @@
     <button type="button" (click)="showModal$.next(false)">Add +</button>
   </div>
   <div class="cancel"  *ngIf="editPerson$ | async">
-    <app-person (onHideForm)="hideForm()" [currentPerson]="config.data?.item" [editMode]="true"></app-person>
+    <app-person (onHideForm)="hideForm()" [currentPerson]="currentPerson" [editMode]="true"></app-person>
     <button type="button" (click)="close()">Cancel</button>
   </div>
 </div>
 
 <div class="cancel"  *ngIf="!!!(showModal$ | async)">
-  <app-person (onHideForm)="hideForm()" [currentPerson]="config.data?.item"></app-person>
+  <app-person (onHideForm)="hideForm()" [currentPerson]="currentPerson"></app-person>
   <button type="button" (click)="close()">Cancel</button>
 </div>

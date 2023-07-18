@@ -35,6 +35,8 @@ export class ModalFormComponent {
 
   allPersons = this.config.data.allPersons;
 
+  currentPerson = this.config.data?.item;
+
   private initialFormValue? : IFormValue;
   private _formValue?: IFormValue;
   @Input() set formValue(val: IFormValue | undefined){
@@ -60,10 +62,14 @@ export class ModalFormComponent {
   }
 
   deleteItem(item: string){
-    if (confirm('Are you sure you want to save this thing into the database?')) {
-      //this.dataService.deleteMe(item, this.config.data.item.id).subscribe();
-      console.log('deleted');
+    if (confirm('Are you sure you want to delete this from the database?')) {
+      this.dataService.deleteOnePerson(item);
     }
+  }
+
+  editItem(each: string){
+    this.currentPerson = this.allPersons.find((item: any) =>  item.id===each);
+    this.editPerson$.next(true);
   }
 
   close(){

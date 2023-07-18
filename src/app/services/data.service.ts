@@ -47,4 +47,7 @@ export class DataService {
   getOnePerson(id: string){
     return this._http.get<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${id}.json`);
   }
+  deleteOnePerson(id: string){
+    return this._http.delete<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${id}.json`).subscribe(c => console.log('service delete',c));
+  }
 }

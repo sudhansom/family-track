@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, mergeMap } from 'rxjs';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PlatformLocation } from '@angular/common';
@@ -25,6 +25,8 @@ interface IPerson {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisplayAllComponent implements OnInit, OnDestroy {
+
+  tempData?: IPerson[];
 
   private clearPopListener = this.platformLocation.onPopState(() => {
     this.ref.close();
@@ -62,8 +64,7 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
 
   expandOrClose(root: IPerson){
     this.data$.subscribe(data => {
-      // let tempData =
-      data.map(item => {
+      this.tempData = data.map(item => {
       if(item.id === root.id){
         if(item?.children?.length){
           return {
@@ -78,8 +79,8 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
       }
       return item;
     })
-    //this.data$.next(tempData);
   });
+
   }
 
   errorMessage(){
