@@ -26,7 +26,7 @@ interface IPerson {
 })
 export class DisplayAllComponent implements OnInit, OnDestroy {
 
-  tempData?: IPerson[];
+  tempData: IPerson[] = [];
 
   private clearPopListener = this.platformLocation.onPopState(() => {
     this.ref.close();
@@ -73,14 +73,14 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
           }
         }
         else {
-          alert(`${item.name} does not have any child...`);
+          //alert(`${item.name} does not have any child...`);
           return item;
         }
       }
       return item;
     })
   });
-
+  this.data$.next(this.tempData);
   }
 
   errorMessage(){
