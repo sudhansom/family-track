@@ -12,6 +12,9 @@
       display: inline-block;
       scale: .7;
       cursor: pointer;
+      &.non-expanding {
+        cursor: initial;
+      }
     }
     span.index {
       display: inline-block;

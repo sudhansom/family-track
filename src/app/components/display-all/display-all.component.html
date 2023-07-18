@@ -6,7 +6,7 @@
 <ng-template #recursiveListTmpl let-root="root">
 <ul>
  <p style="margin:0" *ngIf="root?.gender==='male'">
- <span *ngIf="root?.name" (click)="expandOrClose(root)" class="icon" [smSvgIcon]="root?.expand? 'add' : 'minus'"></span><span (click)="openModal(root)" class="name">{{ root?.name }}</span><span *ngIf="root?.name" > -- {{root?.children? root?.children?.length : 0}}</span>
+ <span *ngIf="root?.name" (click)="expandOrClose(root)" class="icon" [ngClass]="root?.children? '' : 'non-expanding'" [smSvgIcon]="root?.expand? 'add' : 'minus'"></span><span (click)="openModal(root)" class="name">{{ root?.name }}</span><span *ngIf="root?.name" > -- {{root?.children? root?.children?.length : 0}}</span>
  </p>
  <div *ngIf="root?.children?.length > 0 && !root?.expand && root?.gender==='male'">
   <li *ngFor="let item of root.children">
