@@ -114,7 +114,16 @@
       cursor: pointer;
       margin-left: 30px;
       fill: red;
-      scale: .6;
+      scale: .4;
+      &:hover {
+        filter: brightness(.8);
+      }
+    }
+    .edit {
+      cursor: pointer;
+      margin-left: 10px;
+      fill: rgb(10, 175, 92);
+      scale: .9;
       &:hover {
         filter: brightness(.8);
       }
