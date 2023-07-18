@@ -18,7 +18,7 @@
         <p  *ngIf="getGender(each)==='male'">
             <strong>{{i + 1}}.&nbsp;&nbsp;&nbsp;<span>{{getPerson(each)}}</span></strong>
             <span  (click)="editItem(each)" [smSvgIcon]="'edit'" [title]="'edit'" class="edit"></span>
-            <span (click)="deleteItem(each)" [smSvgIcon]="'delete'" [title]="'delete'" class="delete"></span>
+            <span (click)="deleteItem(each, config.data.item?.id)" [smSvgIcon]="'delete'" [title]="'delete'" class="delete"></span>
           </p>
       </div>
     </div>
@@ -28,7 +28,7 @@
         <p  *ngIf="getGender(each)==='female'">
           <strong>{{i + 1}}.&nbsp;&nbsp;&nbsp;<span>{{getPerson(each)}}</span></strong>
           <span  (click)="editItem(each)" [smSvgIcon]="'edit'" [title]="'edit'" class="edit"></span>
-          <span (click)="deleteItem(each)" [smSvgIcon]="'delete'" [title]="'delete'" class="delete"></span>
+          <span (click)="deleteItem(each, config.data.item?.id )" [smSvgIcon]="'delete'" [title]="'delete'" class="delete"></span>
         </p>
       </div>
     </div>

@@ -61,9 +61,9 @@ export class ModalFormComponent {
 
   }
 
-  deleteItem(item: string){
-    if (confirm('Are you sure you want to delete this from the database?')) {
-      this.dataService.deleteOnePerson(item);
+  deleteItem(item: string, parentId: string){
+    if (confirm(`Are you sure you want to delete this from the database?${item} ${parentId}`)) {
+      this.dataService.deleteOnePerson(item, parentId);
     }
   }
 

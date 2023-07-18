@@ -47,7 +47,20 @@ export class DataService {
   getOnePerson(id: string){
     return this._http.get<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${id}.json`);
   }
-  deleteOnePerson(id: string){
-    return this._http.delete<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${id}.json`).subscribe(c => console.log('service delete',c));
+  deleteOnePerson(id: string, parentId: string){
+    return this._http.delete<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${id}.json`).subscribe(c =>
+    {
+      this.editParentChildren(id, parentId);
+    });
   }
+
+  editParentChildren(id: string, parentId: string){
+    this.getOnePerson(parentId).subscribe(data => {
+     let children = data?.children.filter(each => each !==id);
+     let root = data?.root;
+     let newPerson = { ...data, children:children, root: root, id:'' };
+     this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${parentId}.json`, newPerson)
+     .subscribe(d => console.log('edited person...', d));
+   })
+ }
 }
