@@ -2,18 +2,19 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http"
 import { IPerson } from "../types";
 import { BehaviorSubject } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  firebaseApi = 'https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family.json'
+  firebaseApi = environment.familyApi;
   constructor(private _http: HttpClient){}
 
   editMode$ = new BehaviorSubject(false);
 
   savePerson(person: IPerson){
-    return this._http.post<IPerson>(this.firebaseApi, person);
+    return this._http.post<IPerson>(this.firebaseApi + '.json', person);
   }
 
   createANewDatabase(person: any){
@@ -25,7 +26,7 @@ export class DataService {
       let children = data?.children;
       let root = data?.root;
       let newPerson = { ...person, children:children, root: root, id:'' };
-      this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${person.id}.json`, newPerson)
+      this._http.put<IPerson>(this.firebaseApi +`/${person.id}.json`, newPerson)
       .subscribe(d => {
         console.log('edited person...', d);
         window.location.reload();
@@ -43,7 +44,7 @@ export class DataService {
         children = [...children, childId ];
       }
       let person = { ...data, children:children };
-      this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${parentId}.json`, person)
+      this._http.put<IPerson>(this.firebaseApi + `/${parentId}.json`, person)
       .subscribe(d => {
         console.log('child added to ...', person.name)
         window.location.reload();
@@ -51,14 +52,14 @@ export class DataService {
     })
   }
   getAllPersons(){
-    return this._http.get<{[key:string]: IPerson}>(this.firebaseApi);
+    return this._http.get<{[key:string]: IPerson}>(this.firebaseApi + `.json`);
   }
 
   getOnePerson(id: string){
-    return this._http.get<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${id}.json`);
+    return this._http.get<IPerson>(this.firebaseApi + `/${id}.json`);
   }
   deleteOnePerson(id: string, parentId: string){
-    return this._http.delete<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${id}.json`).subscribe(c =>
+    return this._http.delete<IPerson>(this.firebaseApi + `/${id}.json`).subscribe(c =>
     {
       this.editParentChildren(id, parentId);
     });
@@ -69,7 +70,7 @@ export class DataService {
      let children = data?.children.filter(each => each !==id);
      let root = data?.root;
      let newPerson = { ...data, children:children, root: root, id:'' };
-     this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${parentId}.json`, newPerson)
+     this._http.put<IPerson>(this.firebaseApi + `/${parentId}.json`, newPerson)
      .subscribe(d => {
       console.log('edited person...', d);
       window.location.reload();

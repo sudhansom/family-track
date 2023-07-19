@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
         if(allUsers[key] && allUsers[key].userName === user.userName && allUsers[key].password===user.password){
           this.authService.isLoggedIn$.next(true);
           console.log('user exists...')
+          localStorage.setItem('loggedIn', 'true');
           this.onLoggedIn.emit();
           break;
         }

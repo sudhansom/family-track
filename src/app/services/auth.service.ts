@@ -13,7 +13,7 @@ interface IUser {
   providedIn: 'root'
 })
 export class AuthService {
-isLoggedIn$ = new BehaviorSubject(false);
+isLoggedIn$ = new BehaviorSubject(localStorage.getItem('loggedIn')? true : false);
 
 authApi = environment.authApi;
 
