@@ -54,5 +54,5 @@
 </div>
 
 <div class="login" *ngIf="!isLoggedIn$">
-  <app-login (onCancel)="close()"></app-login>
+  <app-login (onLoggedIn)="isLoggedIn$ = true" (onCancel)="close()"></app-login>
 </div>

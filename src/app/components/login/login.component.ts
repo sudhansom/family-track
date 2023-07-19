@@ -2,6 +2,10 @@ import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDest
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
+interface IUser {
+  userName: string,
+  password: string
+}
 
 @Component({
   selector: 'app-login',
@@ -11,6 +15,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   @Output() onCancel = new EventEmitter();
+  @Output() onLoggedIn = new EventEmitter();
+
+  wrongUser = false;
 
   reactiveForm: FormGroup = new FormGroup<any>({});
 
@@ -20,10 +27,21 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     const user = {...this.reactiveForm.value};
-    console.log(user);
-    this.authService.isLoggedIn$.next(true);
-    this.onCancel.emit();
-
+    // this.authService.putUser(user).subscribe(u => {
+    //   this.authService.isLoggedIn$.next(true);
+    //   console.log('user created...');
+    // });
+    this.authService.checkUser(user)
+    .subscribe(allUsers => {
+      let users: IUser[] = []
+      for(let key in allUsers){
+        if(allUsers[key] && allUsers[key].userName === user.userName && allUsers[key].password===user.password){
+          this.authService.isLoggedIn$.next(true);
+          console.log('user exists...')
+          this.onLoggedIn.emit();
+        }
+      }
+    })
   }
 
   ngOnInit(): void {
