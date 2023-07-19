@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 
 import { IPerson } from 'src/app/types';
 import { DataService } from 'src/app/services/data.service';
@@ -13,9 +13,12 @@ import { BehaviorSubject, map } from 'rxjs';
 export class HomepageComponent implements OnInit {
   allPersons$ = new BehaviorSubject<IPerson[]>([]);
 
+  updateUI = signal(false);
+
   constructor(private dataService: DataService){}
 
   ngOnInit(): void {
+    this.updateUI.set(this.dataService.editMode$.getValue());
     this.fetchData();
   }
 

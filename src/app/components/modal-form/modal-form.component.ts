@@ -70,6 +70,7 @@ export class ModalFormComponent {
   editItem(each: string){
     this.currentPerson = this.allPersons.find((item: any) =>  item.id===each);
     this.editPerson$.next(true);
+    this.dataService.editMode$.next(true);
   }
 
   close(){
@@ -88,5 +89,11 @@ export class ModalFormComponent {
   hideForm(){
     this.showModal$.next(true);
     this.editPerson$.next(false);
+    this.dataService.editMode$.next(false);
+  }
+
+  changeEditMode(){
+    this.editPerson$.next(!this.editPerson$.getValue())
+    this.dataService.editMode$.next(true)
   }
 }

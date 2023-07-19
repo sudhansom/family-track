@@ -33,6 +33,6 @@
     <label class="wrapper__form__type-1">Social media link:
       <input type="text" placeholder="social media link" formControlName="link">
     </label>
-    <button [disabled]="!reactiveForm.valid" [ngClass]="!reactiveForm.valid? 'invalid' : ''" type="submit">{{editMode? 'Edit' : 'Add'}}</button>
+    <button [disabled]="!reactiveForm.valid" [ngClass]="!reactiveForm.valid? 'invalid' : ''" type="submit">{{(editMode$ | async)? 'Edit' : 'Add'}}</button>
   </form>
 </div>

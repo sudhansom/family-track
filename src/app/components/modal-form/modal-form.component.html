@@ -4,7 +4,7 @@
   <div class="header" *ngIf="!(editPerson$ | async)">
     <div class="name-section">
       <h3 class="name">{{config.data.item?.name}}</h3>
-      <span (click)="editPerson$.next(!editPerson$.getValue())" title="Edit {{ config.data.item?.name }}">Edit</span>
+      <span (click)="changeEditMode()" title="Edit {{ config.data.item?.name }}">Edit</span>
     </div>
     <p class="description">{{config.data.description}}</p>
   </div>
@@ -43,7 +43,7 @@
     <button type="button" (click)="showModal$.next(false)">Add +</button>
   </div>
   <div class="cancel"  *ngIf="editPerson$ | async">
-    <app-person (onHideForm)="hideForm()" [currentPerson]="currentPerson" [editMode]="true"></app-person>
+    <app-person (onHideForm)="hideForm()" [currentPerson]="currentPerson"></app-person>
     <button type="button" (click)="close()">Cancel</button>
   </div>
 </div>
