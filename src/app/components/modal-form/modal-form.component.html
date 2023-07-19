@@ -43,12 +43,12 @@
     <button type="button" (click)="showModal$.next(false)">Add +</button>
   </div>
   <div class="cancel"  *ngIf="editPerson$ | async">
-    <app-person (onHideForm)="hideForm()" [currentPerson]="currentPerson"></app-person>
+    <app-person [currentPerson]="currentPerson"></app-person>
     <button type="button" (click)="close()">Cancel</button>
   </div>
 </div>
 
 <div class="cancel"  *ngIf="!!!(showModal$ | async)">
-  <app-person (onHideForm)="hideForm()" [currentPerson]="currentPerson"></app-person>
+  <app-person [currentPerson]="currentPerson"></app-person>
   <button type="button" (click)="close()">Cancel</button>
 </div>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy, OnInit, signal, effect } from '@angular/core';
 import { BehaviorSubject, map, mergeMap } from 'rxjs';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -29,6 +29,7 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
 
   tempData: IPerson[] = [];
   subscription?: Subscription;
+  editMode = signal(this.dataService.editMode$.getValue());
 
   private clearPopListener = this.platformLocation.onPopState(() => {
     this.ref.close();
@@ -111,7 +112,13 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
     private platformLocation: PlatformLocation,
     public ref: DynamicDialogRef,
     private dataService: DataService,
-  ){}
+  ){
+    effect(()=>{
+      // this.fetchData();
+      // this.editMode.set(!this.dataService.editMode$.getValue());
+      console.log(this.editMode());
+    });
+  }
 
   ngOnInit(){
     this.fetchData();

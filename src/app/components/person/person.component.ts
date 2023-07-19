@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
+import { Router } from '@angular/router';
 
 import { IPerson } from 'src/app/types';
 
@@ -12,10 +13,8 @@ import { IPerson } from 'src/app/types';
 })
 export class PersonComponent implements OnInit {
   reactiveForm: FormGroup = new FormGroup<any>({});
-  @Output()onSave = new EventEmitter<IPerson>()
   editMode$ = this.dataService.editMode$;
   @Input() currentPerson?: IPerson;
-  @Output() onHideForm = new EventEmitter();
 
   ngOnInit(): void {
     console.log(this.currentPerson);
@@ -41,9 +40,7 @@ export class PersonComponent implements OnInit {
         this.dataService.addChild(newPerson.id, d.name);
       });
     }
-    this.reactiveForm.reset();
-    this.onHideForm.emit();
   }
 
-  constructor(private dataService: DataService){}
+  constructor(private dataService: DataService, private router: Router){}
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output, Input, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BehaviorSubject } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
@@ -46,13 +46,6 @@ export class ModalFormComponent {
     this._formValue = val;
   }
 
-  get formValue(){
-    return this._formValue;
-  }
-
-
-  @Output() delete = new EventEmitter();
-
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
@@ -74,6 +67,7 @@ export class ModalFormComponent {
   }
 
   close(){
+    this.dataService.editMode$.next(false);
     this.ref.close();
   }
 
@@ -84,12 +78,6 @@ export class ModalFormComponent {
   getGender(each: string){
     const gender = this.allPersons.find((item: any) => item?.id===each)?.gender;
     return gender;
-  }
-
-  hideForm(){
-    this.showModal$.next(true);
-    this.editPerson$.next(false);
-    this.dataService.editMode$.next(false);
   }
 
   changeEditMode(){

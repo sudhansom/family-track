@@ -26,7 +26,11 @@ export class DataService {
       let root = data?.root;
       let newPerson = { ...person, children:children, root: root, id:'' };
       this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${person.id}.json`, newPerson)
-      .subscribe(d => console.log('edited person...', d));
+      .subscribe(d => {
+        console.log('edited person...', d);
+        window.location.reload();
+
+      });
     })
   }
   addChild(parentId: string, childId: string){
@@ -40,7 +44,10 @@ export class DataService {
       }
       let person = { ...data, children:children };
       this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${parentId}.json`, person)
-      .subscribe(d => console.log('child added to ...', person.name));
+      .subscribe(d => {
+        console.log('child added to ...', person.name)
+        window.location.reload();
+      });
     })
   }
   getAllPersons(){
@@ -63,7 +70,10 @@ export class DataService {
      let root = data?.root;
      let newPerson = { ...data, children:children, root: root, id:'' };
      this._http.put<IPerson>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/family/${parentId}.json`, newPerson)
-     .subscribe(d => console.log('edited person...', d));
+     .subscribe(d => {
+      console.log('edited person...', d);
+      window.location.reload();
+    });
    })
  }
 }
