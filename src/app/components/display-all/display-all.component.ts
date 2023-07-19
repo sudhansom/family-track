@@ -5,6 +5,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { PlatformLocation } from '@angular/common';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
 import { DataService } from 'src/app/services/data.service';
+import { Subscription } from 'rxjs';
 
 
 interface IPerson {
@@ -27,6 +28,7 @@ interface IPerson {
 export class DisplayAllComponent implements OnInit, OnDestroy {
 
   tempData: IPerson[] = [];
+  subscription?: Subscription;
 
   private clearPopListener = this.platformLocation.onPopState(() => {
     this.ref.close();
@@ -58,12 +60,12 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
 
   getPerson(id: string){
     let data:any;
-    this.data$.subscribe(d => {data = d.find(item => item.id === id)});
+    this.subscription = this.data$.subscribe(d => {data = d.find(item => item.id === id)});
     return data;
   }
 
   expandOrClose(root: IPerson){
-    this.data$.subscribe(data => {
+    this.subscription = this.data$.subscribe(data => {
       this.tempData = data.map(item => {
       if(item.id === root.id){
         if(item?.children?.length){
@@ -112,7 +114,7 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
   ){}
 
   ngOnInit(){
-    this.dataService.getAllPersons()
+    this.subscription = this.dataService.getAllPersons()
     .pipe(map(data => {
       const tempData: IPerson[] = []
       for(const key in data){
@@ -131,6 +133,7 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
     this.clearPopListener();
   }
 }
