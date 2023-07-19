@@ -17,7 +17,6 @@ export class PersonComponent implements OnInit {
   @Input() currentPerson?: IPerson;
 
   ngOnInit(): void {
-    console.log(this.currentPerson);
     this.reactiveForm = new FormGroup({
       name: new FormControl(this.editMode$.getValue()? this.currentPerson?.name:null, Validators.required),
       gender: new FormControl(this.editMode$.getValue()? this.currentPerson?.gender:'male'),

@@ -1,0 +1,42 @@
+:host {
+  .login {
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      input {
+        padding: 5px;
+        border-radius: 7px;
+      }
+      .buttons {
+        display: flex;
+        justify-content: space-around;
+        button {
+          padding: 9px 18px;
+          border-radius: 9px;
+          border: none;
+          font-weight: bold;
+          background-color: rgb(220, 217, 217);
+          cursor: pointer;
+          transition: all .4s ease-in-out;
+          &:hover {
+            filter:brightness(.8);
+          }
+          &.deactivate {
+            cursor: not-allowed;
+            background-color: rgb(245, 241, 241);
+            &:hover {
+              filter: brightness(1);
+            }
+          }
+        }
+      }
+    }
+  }
+}

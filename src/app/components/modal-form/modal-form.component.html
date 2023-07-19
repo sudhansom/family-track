@@ -1,5 +1,5 @@
 <div class="wrapper"
-  *ngIf="showModal$ | async"
+  *ngIf="(showModal$ | async) && isLoggedIn$"
 >
   <div class="header" *ngIf="!(editPerson$ | async)">
     <div class="name-section">
@@ -48,7 +48,11 @@
   </div>
 </div>
 
-<div class="cancel"  *ngIf="!!!(showModal$ | async)">
+<div class="cancel"  *ngIf="!!!(showModal$ | async) && isLoggedIn$">
   <app-person [currentPerson]="currentPerson"></app-person>
   <button type="button" (click)="close()">Cancel</button>
+</div>
+
+<div class="login" *ngIf="!isLoggedIn$">
+  <app-login (onCancel)="close()"></app-login>
 </div>

@@ -1,0 +1,14 @@
+<div class="login">
+  <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+    <label>Username:
+      <input type="text" formControlName="userName" placeholder="User Name">
+    </label>
+    <label>Password:
+      <input type="text" formControlName="password" placeholder="Password">
+    </label>
+    <div class="buttons">
+    <button type="button" (click)="cancelLogin()">Cancel</button>
+    <button [ngClass]="reactiveForm.valid? '' : 'deactivate'" [disabled]="!reactiveForm.valid" type="submit">Login</button>
+    </div>
+  </form>
+</div>

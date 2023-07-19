@@ -6,6 +6,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SvgIconModule } from 'src/app/directives/svg-icon/svg-icon.module';
 import {CheckboxModule} from 'primeng/checkbox';
 import { PersonModule } from '../person/person.module';
+import { LoginModule } from '../login/login.module';
 
 @NgModule({
   declarations: [ModalFormComponent],
@@ -16,6 +17,7 @@ import { PersonModule } from '../person/person.module';
     SvgIconModule,
     CheckboxModule,
     PersonModule,
+    LoginModule,
   ],
   exports: [ModalFormComponent],
   providers: [],

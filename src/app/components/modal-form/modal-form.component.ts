@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BehaviorSubject } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 interface IFormFieldValue {
@@ -32,6 +33,7 @@ export class ModalFormComponent {
   loading$ = new BehaviorSubject(false);
 
   editPerson$ = new BehaviorSubject(false);
+  isLoggedIn$ = this.authService.isLoggedIn$.getValue();
 
   allPersons = this.config.data.allPersons;
 
@@ -50,6 +52,7 @@ export class ModalFormComponent {
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private dataService: DataService,
+    private authService: AuthService,
   ) {
 
   }
