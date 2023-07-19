@@ -6,6 +6,7 @@
     <label>Password:
       <input type="password" formControlName="password" placeholder="Password">
     </label>
+    <p *ngIf="wrongUser$ | async" class="error">Wrong User !!!</p>
     <div class="buttons">
     <button type="button" (click)="cancelLogin()">Cancel</button>
     <button [ngClass]="reactiveForm.valid? '' : 'deactivate'" [disabled]="!reactiveForm.valid" type="submit">Login</button>

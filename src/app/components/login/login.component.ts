@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy, OnInit, signal, effect } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 interface IUser {
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   @Output() onCancel = new EventEmitter();
   @Output() onLoggedIn = new EventEmitter();
 
-  wrongUser = false;
+  wrongUser$ = new BehaviorSubject(false);
 
   reactiveForm: FormGroup = new FormGroup<any>({});
 
@@ -33,15 +34,18 @@ export class LoginComponent implements OnInit {
     // });
     this.authService.checkUser(user)
     .subscribe(allUsers => {
+      this.wrongUser$.next(false);
       let users: IUser[] = []
       for(let key in allUsers){
         if(allUsers[key] && allUsers[key].userName === user.userName && allUsers[key].password===user.password){
           this.authService.isLoggedIn$.next(true);
           console.log('user exists...')
           this.onLoggedIn.emit();
+          break;
         }
       }
     })
+    this.wrongUser$.next(true);
   }
 
   ngOnInit(): void {
