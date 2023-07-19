@@ -114,6 +114,9 @@ export class DisplayAllComponent implements OnInit, OnDestroy {
   ){}
 
   ngOnInit(){
+    this.fetchData();
+  }
+  fetchData(){
     this.subscription = this.dataService.getAllPersons()
     .pipe(map(data => {
       const tempData: IPerson[] = []
