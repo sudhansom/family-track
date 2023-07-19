@@ -4,7 +4,7 @@
   <div class="header" *ngIf="!(editPerson$ | async)">
     <div class="name-section">
       <h3 class="name">{{config.data.item?.name}}</h3>
-      <span (click)="changeEditMode()" title="Edit {{ config.data.item?.name }}">Edit</span>
+      <span (click)="changeEditMode()" title="Edit {{ config.data.item?.name }}" [smSvgIcon]="'edit'"></span>
     </div>
     <p class="description">{{config.data.description}}</p>
   </div>
