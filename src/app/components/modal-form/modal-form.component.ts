@@ -33,6 +33,7 @@ export class ModalFormComponent {
   loading$ = new BehaviorSubject(false);
 
   editPerson$ = new BehaviorSubject(false);
+
   isLoggedIn$ = this.authService.isLoggedIn$.getValue();
 
   allPersons = this.config.data.allPersons;

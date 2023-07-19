@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy, OnInit, signal, effect } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -18,7 +19,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log('form submitted...');
+    const user = {...this.reactiveForm.value};
+    console.log(user);
+    this.authService.isLoggedIn$.next(true);
+    this.onCancel.emit();
+
   }
 
   ngOnInit(): void {
@@ -27,4 +32,5 @@ export class LoginComponent implements OnInit {
       password: new FormControl(null, Validators.required)
     })
   }
+  constructor(private authService: AuthService){}
 }
